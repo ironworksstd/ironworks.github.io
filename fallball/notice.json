@@ -1,8 +1,16 @@
 {
-  "Notice": {
-    "Content": "Bu bir test mesajıdır",
-    "Language": "Turkish",
-    "From": 1768511032,
-    "To": 1768521032
-  }
+  "Notices": [
+    {
+      "Content": "// Bu bir test mesajıdır",
+      "Language": "Turkish",
+      "From": 1768511032,
+      "To": 1768521032
+    },
+    {
+      "Content": "// This is a test message",
+      "Language": "English",
+      "From": 1768511032,
+      "To": 1768521032
+    }
+  ]
 }

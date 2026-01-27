@@ -13,6 +13,13 @@
       "From": 1769400400,
       "To": 1772323200,
       "Version": "32"
+    },
+    {
+      "Content": "// <color=#ff0050>Renkli</color> test duyurusu! / <color=#ff0050>ʕ•ᴥ•ʔ</color> //",
+      "Language": "Turkish",
+      "From": 1769400400,
+      "To": 1771113600,
+      "Version": "33"
     }
   ]
 }

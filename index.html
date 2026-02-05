@@ -1,383 +1,389 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>IronWorks Studios — Fall Ball</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>IronWorks Studios</title>
 
-  <!-- Basic styling: colorful, modern, mobile-first -->
-  <style>
-    :root{
-      --bg:#0f1724;
-      --card:#0b1220;
-      --muted: #9aa9c6;
-      --accent1: #ff6b6b;   /* coral */
-      --accent2: #6bdeff;   /* cyan */
-      --accent3: #ffd36b;   /* warm yellow */
-      --glass: rgba(255,255,255,0.06);
-      --radius: 14px;
-      --max-w: 980px;
-      --nav-h: 64px;
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    }
+<!-- Simple system font stack for fast rendering -->
+<style>
+  :root{
+    --bg:#0f1724;            /* dark navy background */
+    --panel:#0f1a2b;         /* slightly lighter panel */
+    --accent-1:#ff6b6b;      /* coral */
+    --accent-2:#6bffea;      /* aqua */
+    --accent-3:#ffd86b;      /* warm yellow */
+    --muted:#9aa7bf;         /* muted text */
+    --glass: rgba(255,255,255,0.04);
+    --radius:14px;
+    --maxw:1100px;
+    --gap:18px;
+    --shadow: 0 8px 30px rgba(2,6,23,0.6);
+  }
 
-    html,body{height:100%}
-    body{
-      margin:0;
-      background:
-        radial-gradient(800px 400px at 10% 10%, rgba(107,222,255,0.06), transparent 10%),
-        radial-gradient(600px 300px at 90% 90%, rgba(255,107,107,0.04), transparent 10%),
-        var(--bg);
-      color: #e6eef8;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      line-height:1.35;
-      display:flex;
-      justify-content:center;
-      padding:28px 18px;
-      box-sizing:border-box;
-    }
+  /* Reset & layout */
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background:
+      radial-gradient(1200px 600px at 10% 10%, rgba(107,111,255,0.06), transparent 8%),
+      radial-gradient(900px 500px at 90% 90%, rgba(255,107,107,0.03), transparent 6%),
+      var(--bg);
+    color: #e6eef8;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    line-height:1.35;
+    padding:32px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
 
-    .container{
-      width:100%;
-      max-width:var(--max-w);
-    }
+  .container{
+    width:100%;
+    max-width:var(--maxw);
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
+    border-radius:calc(var(--radius) + 6px);
+    padding:28px;
+    box-shadow:var(--shadow);
+    display:grid;
+    grid-template-columns: 1fr 420px;
+    gap:var(--gap);
+    align-items:stretch;
+    min-height:520px;
+  }
 
-    /* Header / top nav */
-    header{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      height:var(--nav-h);
-      margin-bottom:18px;
-    }
+  /* Left: hero & feature list */
+  .hero{
+    padding:24px;
+    border-radius:var(--radius);
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), var(--glass));
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+    justify-content:center;
+  }
 
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-    }
-    .brand img{
-      width:48px;
-      height:48px;
-      object-fit:contain;
-      border-radius:10px;
-      background:linear-gradient(135deg,var(--accent2),var(--accent1));
-      padding:6px;
-      box-shadow:0 6px 18px rgba(11,17,32,0.6), inset 0 -6px 12px rgba(255,255,255,0.03);
-    }
-    .brand h1{
-      font-size:18px;
-      margin:0;
-      letter-spacing:0.4px;
-    }
-    .brand p{margin:0;font-size:12px;color:var(--muted)}
+  header.brand{
+    display:flex;
+    gap:14px;
+    align-items:center;
+  }
+  header.brand img{
+    width:68px;
+    height:68px;
+    object-fit:contain;
+    border-radius:10px;
+    background:linear-gradient(135deg,var(--accent-2),var(--accent-1));
+    padding:8px;
+    box-shadow: 0 6px 20px rgba(99,102,255,0.12);
+  }
+  header.brand h1{
+    font-size:20px;
+    margin:0;
+    letter-spacing:0.4px;
+  }
+  header.brand p{
+    margin:0;
+    color:var(--muted);
+    font-size:13px;
+  }
 
-    /* Main hero card */
-    .hero{
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border-radius:var(--radius);
-      padding:18px;
-      box-shadow: 0 8px 40px rgba(2,6,23,0.6);
-      display:grid;
-      grid-template-columns: 1fr;
-      gap:14px;
-      align-items:center;
-      overflow:hidden;
-    }
+  .headline{
+    margin-top:4px;
+    font-size:28px;
+    font-weight:700;
+    line-height:1.05;
+    letter-spacing:-0.6px;
+  }
 
-    /* Layout for larger screens */
-    @media(min-width:900px){
-      .hero{grid-template-columns: 48% 52%;}
-    }
+  .sub{
+    color:var(--muted);
+    font-size:15px;
+    max-width:56ch;
+  }
 
-    /* Left column: feature image + download CTA */
-    .feature{
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-      align-items:flex-start;
-    }
-    .game-card{
-      position:relative;
-      width:100%;
-      background: linear-gradient(135deg, rgba(107,222,255,0.06), rgba(255,107,107,0.04));
-      border-radius:12px;
-      padding:14px;
-      display:flex;
-      gap:12px;
-      align-items:center;
-      box-shadow: 0 8px 30px rgba(11,17,32,0.5);
-    }
-    .game-card img{
-      width:92px;
-      height:92px;
-      object-fit:contain;
-      border-radius:10px;
-      background: linear-gradient(135deg,var(--accent3),rgba(255,255,255,0.02));
-      padding:8px;
-    }
-    .game-info h2{margin:0;font-size:20px}
-    .game-info p{margin:4px 0 0;color:var(--muted);font-size:13px}
+  /* CTA buttons row */
+  .ctas{
+    display:flex;
+    gap:12px;
+    margin-top:6px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    text-decoration:none;
+    padding:12px 16px;
+    border-radius:12px;
+    font-weight:600;
+    font-size:15px;
+    box-shadow: 0 6px 20px rgba(2,6,23,0.45);
+    transition:transform .12s ease, box-shadow .12s ease;
+    border:1px solid rgba(255,255,255,0.04);
+  }
+  .btn:focus{outline:3px solid rgba(255,255,255,0.08); outline-offset:2px}
+  .btn:active{transform:translateY(1px)}
+  .btn-primary{
+    background: linear-gradient(90deg,var(--accent-1),var(--accent-2));
+    color:#07101a;
+  }
+  .btn-ghost{
+    background:transparent;
+    border:1px solid rgba(255,255,255,0.06);
+    color:var(--accent-3);
+  }
 
-    .cta-row{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:4px;
-    }
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:10px 14px;
-      border-radius:12px;
-      font-weight:600;
-      font-size:14px;
-      cursor:pointer;
-      text-decoration:none;
-      color:#081229;
-      border:0;
-    }
-    .btn-store{
-      background:linear-gradient(90deg,var(--accent2),var(--accent1));
-      color:#041026;
-      box-shadow:0 8px 20px rgba(107,222,255,0.08);
-    }
-    .btn-play{
-      background:var(--glass);
-      color:var(--accent3);
-      border:1px solid rgba(255,211,107,0.12);
-    }
+  /* feature grid */
+  .features{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+    gap:12px;
+    margin-top:12px;
+  }
+  .feature{
+    background:linear-gradient(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.02));
+    padding:12px;
+    border-radius:12px;
+    display:flex;
+    gap:10px;
+    align-items:center;
+    min-height:66px;
+  }
+  .badge{
+    width:46px; height:46px;
+    border-radius:10px;
+    display:flex;align-items:center;justify-content:center;
+    color:#07101a;font-weight:700;
+    font-size:16px;
+    box-shadow: 0 6px 18px rgba(2,6,23,0.45);
+  }
+  .f-title{font-weight:700;font-size:14px;margin:0}
+  .f-sub{font-size:12px;color:var(--muted);margin:0;margin-top:4px}
 
-    .meta{
-      font-size:12px;
-      color:var(--muted);
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:6px;
-    }
+  /* Right: panel with screenshots / contact */
+  .panel{
+    padding:20px;
+    border-radius:calc(var(--radius) - 6px);
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    min-height:420px;
+  }
 
-    /* Right column: about + features + contact */
-    .panel{
-      padding:12px;
-      border-radius:12px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-    }
+  .preview{
+    flex:1;
+    border-radius:12px;
+    overflow:hidden;
+    background:
+      linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.25)),
+      linear-gradient(135deg, rgba(107,111,255,0.08), rgba(255,107,107,0.06));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+  }
 
-    .section-title{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      font-weight:700;
-    }
+  .phone{
+    width:220px;
+    max-width:60%;
+    border-radius:28px;
+    background:linear-gradient(180deg,#071226, #0b1624);
+    padding:14px;
+    box-shadow: 0 18px 50px rgba(2,6,23,0.6);
+    border: 1px solid rgba(255,255,255,0.04);
+  }
+  .screen{
+    width:100%;
+    height:420px;
+    max-height:460px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.4));
+    border-radius:16px;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--muted);
+    font-size:14px;
+    padding:18px;
+    box-sizing:border-box;
+  }
+  .screen img{width:100%; height:100%; object-fit:cover; display:block}
 
-    .desc{color:var(--muted); font-size:14px}
+  .meta{
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    align-items:center;
+  }
+  .store{
+    display:flex;
+    gap:10px;
+    align-items:center;
+  }
+  .store a{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:10px 12px;
+    border-radius:10px;
+    text-decoration:none;
+    color:#07101a;
+    background: linear-gradient(90deg,var(--accent-3), #ffd37a);
+    font-weight:700;
+    font-size:14px;
+  }
 
-    .features{
-      display:grid;
-      grid-template-columns: repeat(2,1fr);
-      gap:8px;
-    }
-    @media(max-width:480px){ .features{grid-template-columns:1fr} }
+  .contact{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    font-size:14px;
+  }
+  .contact a{color:var(--accent-2); text-decoration:none; font-weight:600}
+  .small{font-size:13px;color:var(--muted)}
 
-    .feature-item{
-      background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
-      padding:10px;
-      border-radius:10px;
-      font-size:13px;
-      display:flex;
-      gap:10px;
-      align-items:center;
-    }
-    .pill{
-      min-width:36px;
-      height:36px;
-      background:linear-gradient(135deg,var(--accent1),var(--accent2));
-      border-radius:10px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      font-weight:700;
-      color:#031026;
-      font-size:13px;
-    }
+  /* Footer */
+  footer{
+    margin-top:8px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    color:var(--muted);
+    font-size:13px;
+  }
 
-    .contact{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:8px;
-      margin-top:6px;
-    }
-    .contact a{color:var(--accent2); text-decoration:none; font-weight:600; font-size:14px}
+  /* Responsive adjustments */
+  @media (max-width:980px){
+    .container{grid-template-columns:1fr; padding:18px}
+    .panel{order:-1}
+    .phone{width:260px}
+    .screen{height:480px}
+  }
 
-    /* Footer */
-    footer{
-      margin-top:16px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      color:var(--muted);
-      font-size:13px;
-      padding:12px;
-      border-radius:12px;
-      background: transparent;
-    }
+  @media (max-width:420px){
+    body{padding:18px}
+    .headline{font-size:22px}
+    header.brand img{width:56px;height:56px}
+    .phone{width:220px}
+    .screen{height:360px}
+    .container{padding:14px}
+  }
 
-    /* subtle animated background shapes */
-    .bg-blob{
-      position:absolute;
-      inset:auto;
-      width:220px;height:220px;
-      filter:blur(36px);
-      opacity:0.12;
-      z-index:0;
-      pointer-events:none;
-      transform:translateY(-20px);
-    }
-    .bg-blob.cyan{right:8%; top:-40px; background:radial-gradient(circle,#6bdeff,#285f6b)}
-    .bg-blob.coral{left:6%; bottom:-40px; background:radial-gradient(circle,#ff6b6b,#b33b3b)}
-  </style>
+  /* Accessibility: focus-visible */
+  :focus{outline:none}
+  :focus-visible{outline:3px solid rgba(255,255,255,0.08); outline-offset:2px}
+</style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <div class="brand">
-        <img src="/logo.png" alt="IronWorks Studios logo" />
+  <main class="container" role="main" aria-labelledby="site-title">
+    <section class="hero" aria-label="IronWorks Studios overview">
+      <header class="brand">
+        <img src="/logo.png" alt="IronWorks Studios logo" onerror="this.style.display='none'"/>
         <div>
-          <h1>IronWorks Studios</h1>
-          <p>Colorful 2D arcade & casual games</p>
+          <h1 id="site-title">IronWorks Studios</h1>
+          <p>Bold mobile games — crafted with performance & style</p>
+        </div>
+      </header>
+
+      <h2 class="headline">Playful. Polished. Powerful.</h2>
+      <p class="sub">We design bright, engaging mobile games with crisp visuals and tight performance. Available on Google Play — built for fast downloads and standout visibility on small screens.</p>
+
+      <div class="ctas">
+        <a class="btn btn-primary" href="https://play.google.com/store/apps/dev?id=7277468339401903439" target="_blank" rel="noopener noreferrer" aria-label="Open IronWorks Studios on Google Play">
+          <!-- simple SVG icon -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden focusable="false"><path d="M3 12l18-9-2 18L12 21 3 12z" fill="#07101a"/></svg>
+          View on Google Play
+        </a>
+
+        <a class="btn btn-ghost" href="mailto:ironworks@yaani.com" aria-label="Email IronWorks Studios">
+          Contact Us
+        </a>
+      </div>
+
+      <div class="features" aria-hidden="false">
+        <div class="feature">
+          <div class="badge" style="background:linear-gradient(135deg,var(--accent-1),var(--accent-3))">UX</div>
+          <div>
+            <p class="f-title">Optimized UX</p>
+            <p class="f-sub">Readable UI scale, clear tap targets, fast load.</p>
+          </div>
+        </div>
+
+        <div class="feature">
+          <div class="badge" style="background:linear-gradient(135deg,var(--accent-2),var(--accent-1))">ART</div>
+          <div>
+            <p class="f-title">Vibrant Art</p>
+            <p class="f-sub">High-contrast palettes and accessible icons.</p>
+          </div>
+        </div>
+
+        <div class="feature">
+          <div class="badge" style="background:linear-gradient(135deg,var(--accent-3),var(--accent-2))">PERF</div>
+          <div>
+            <p class="f-title">Performance</p>
+            <p class="f-sub">Small APKs, smooth 60fps gameplay on modern phones.</p>
+          </div>
         </div>
       </div>
 
-      <nav aria-label="top links" style="display:flex;gap:8px;align-items:center">
-        <a class="btn btn-play" href="#about" style="padding:8px 12px;border-radius:10px;background:var(--glass);color:var(--accent3)">About</a>
-        <a class="btn btn-store" href="https://play.google.com/store/apps/details?id=com.ironworks.fallball" target="_blank" rel="noopener">Get Fall Ball</a>
-      </nav>
-    </header>
-
-    <main class="hero" role="main">
-      <div class="feature">
-        <div class="game-card" aria-hidden="false">
-          <img src="/fallball/assets/logo.png" alt="Fall Ball logo" />
-          <div class="game-info">
-            <h2>Fall Ball</h2>
-            <p class="desc">A colorful 2D arcade game — quick rounds, joyful visuals, tight controls.</p>
-            <div class="meta">
-              <span><strong>Version:</strong> thirteen</span>
-              <span><strong>Genre:</strong> 2D arcade</span>
-            </div>
-          </div>
-        </div>
-
-        <div style="width:100%">
-          <p class="desc">Jump into Fall Ball — a fast-paced arcade experience with vibrant levels, easy pick-up-and-play mechanics, and a focus on visibility and simple, satisfying gameplay.</p>
-
-          <div class="cta-row">
-            <a class="btn btn-store" href="https://play.google.com/store/apps/details?id=com.ironworks.fallball" target="_blank" rel="noopener">
-              • Play on Google Play
-            </a>
-            <a class="btn btn-play" href="#screenshots" style="background:linear-gradient(90deg,var(--accent3),rgba(255,211,107,0.06));color:#081229">
-              • Screenshots
-            </a>
-            <a class="btn" href="#contact" style="background:transparent;color:var(--muted);border:1px solid rgba(255,255,255,0.04)">
-              • Rate & Feedback
-            </a>
-          </div>
-
-          <div class="meta" style="margin-top:12px">
-            <span>High contrast UI</span>
-            <span>Large touch targets</span>
-            <span>Optimized for mobile</span>
-          </div>
-        </div>
-
-        <div style="margin-top:8px;color:var(--muted);font-size:13px">Pro tip: on small screens, buttons are large and tappable; important texts use high-contrast colors.</div>
-      </div>
-
-      <aside class="panel" id="about">
-        <div>
-          <div class="section-title">About Fall Ball</div>
-          <p class="desc" style="margin:8px 0 0">Fall Ball is a joyful 2D arcade game built around quick reflexes and playful stage hazards. Designed for short sessions with bold colors and clear visual hierarchy so players can react fast.</p>
-        </div>
-
-        <div>
-          <div class="section-title">Highlights</div>
-          <div class="features" style="margin-top:8px">
-            <div class="feature-item"><div class="pill">01</div><div><strong>Fast rounds</strong><div class="desc">60–120 second matches</div></div></div>
-            <div class="feature-item"><div class="pill">02</div><div><strong>Accessible</strong><div class="desc">High-contrast art & large touch targets</div></div></div>
-            <div class="feature-item"><div class="pill">03</div><div><strong>Colorful</strong><div class="desc">Palette-driven levels</div></div></div>
-            <div class="feature-item"><div class="pill">04</div><div><strong>Replayable</strong><div class="desc">Procedural obstacles & leaderboards</div></div></div>
-          </div>
-        </div>
-
-        <div id="contact">
-          <div class="section-title">Contact</div>
-          <div class="contact" style="margin-top:8px">
-            <div style="color:var(--muted);font-size:13px">
-              <div><strong>Email</strong></div>
-              <div><a href="mailto:ironworks@yaani.com">ironworks@yaani.com</a></div>
-            </div>
-            <div style="text-align:right;color:var(--muted);font-size:13px">
-              <div><strong>Studio</strong></div>
-              <div>IronWorks Studios</div>
-            </div>
-          </div>
-        </div>
-
-        <footer>
-          <div>© <span id="year"></span> IronWorks Studios</div>
-          <div style="display:flex;gap:10px;align-items:center">
-            <a href="https://play.google.com/store/apps/details?id=com.ironworks.fallball" class="btn btn-store" style="padding:8px 12px;font-size:13px">Open in Play Store</a>
-          </div>
-        </footer>
-      </aside>
-
-      <!-- decorative blobs -->
-      <div class="bg-blob cyan" aria-hidden="true"></div>
-      <div class="bg-blob coral" aria-hidden="true"></div>
-    </main>
-
-    <!-- optional screenshots area (placeholder) -->
-    <section id="screenshots" style="margin-top:16px;">
-      <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
-        <div style="flex:1;min-width:180px;background:linear-gradient(135deg,#081229,rgba(255,255,255,0.01));border-radius:12px;padding:10px;max-width:260px">
-          <div style="height:420px;border-radius:10px;background:linear-gradient(180deg,rgba(255,107,107,0.07),rgba(107,222,255,0.04));display:flex;align-items:center;justify-content:center;color:#041026;font-weight:700">
-            Screenshot 1
-          </div>
-        </div>
-        <div style="flex:1;min-width:180px;background:linear-gradient(135deg,#081229,rgba(255,255,255,0.01));border-radius:12px;padding:10px;max-width:260px">
-          <div style="height:420px;border-radius:10px;background:linear-gradient(180deg,rgba(255,211,107,0.07),rgba(107,222,255,0.03));display:flex;align-items:center;justify-content:center;color:#041026;font-weight:700">
-            Screenshot 2
-          </div>
-        </div>
-        <div style="flex:1;min-width:180px;background:linear-gradient(135deg,#081229,rgba(255,255,255,0.01));border-radius:12px;padding:10px;max-width:260px">
-          <div style="height:420px;border-radius:10px;background:linear-gradient(180deg,rgba(107,222,255,0.06),rgba(255,107,107,0.03));display:flex;align-items:center;justify-content:center;color:#041026;font-weight:700">
-            Screenshot 3
-          </div>
-        </div>
-      </div>
+      <footer>
+        <span class="small">© IronWorks Studios</span>
+        <span class="small">Built for mobile visibility</span>
+      </footer>
     </section>
 
-  </div>
+    <aside class="panel" aria-label="Preview and contact">
+      <div class="preview" role="img" aria-label="Game preview screenshot">
+        <div class="phone" aria-hidden="false">
+          <div class="screen" id="screenshot">
+            <!-- Add screenshots in /screens/ or replace with dynamic content -->
+            <img src="/screens/hero-1.jpg" alt="Game screenshot" onerror="this.alt='Screenshot unavailable'; this.style.objectFit='contain'; this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'600\\' height=\\'800\\'><rect width=\\'100%\\' height=\\'100%\\' fill=\\'%2308141a\\'/><text x=\\'50%\\' y=\\'50%\\' fill=\\'%23b6c6dc\\' font-size=\\'20\\' font-family=\\'Arial\\' text-anchor=\\'middle\\'>Screenshot</text></svg>'"/>
+          </div>
+        </div>
+      </div>
 
+      <div class="meta">
+        <div>
+          <div style="font-weight:800;font-size:15px">Get our games</div>
+          <div class="small">Tap to open the developer page on Google Play</div>
+        </div>
+
+        <div class="store">
+          <a href="https://play.google.com/store/apps/dev?id=7277468339401903439" target="_blank" rel="noopener noreferrer" aria-label="Open Google Play developer page">
+            <!-- simplified Play badge -->
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M3 2l15 10-15 10V2z" fill="#07101a"/></svg>
+            Play Store
+          </a>
+        </div>
+      </div>
+
+      <div class="contact" aria-label="Contact information">
+        <div style="font-weight:700">Contact</div>
+        <div class="small">Email: <a href="mailto:ironworks@yaani.com">ironworks@yaani.com</a></div>
+        <div class="small">Logo path: <code>/logo.png</code></div>
+        <div class="small">Tip: include 512×512 PNG for best results.</div>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Minimal JS to improve accessibility and avoid visibility issues -->
   <script>
-    // small runtime tweaks: set current year and accessible focus outlines
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // ensure large tap targets for keyboard users
+    // Ensure focus outlines for keyboard users
     (function(){
-      const links = document.querySelectorAll('a,button');
-      links.forEach(el=>{
-        el.style.outline = 'none';
-        el.addEventListener('focus', ()=> el.style.boxShadow = '0 0 0 4px rgba(107,222,255,0.12)');
-        el.addEventListener('blur', ()=> el.style.boxShadow = 'none');
+      let mouseUsed = false;
+      window.addEventListener('mousedown', ()=> mouseUsed = true, {capture:true});
+      window.addEventListener('keydown', (e)=>{
+        if(e.key === 'Tab' || e.key === 'Shift') mouseUsed = false;
+      }, {capture:true});
+      document.addEventListener('focusin', (ev)=>{
+        if(mouseUsed) ev.target.classList.remove('focus-visible');
+        else ev.target.classList.add('focus-visible');
       });
     })();
   </script>

@@ -2,341 +2,384 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>IronWorks Studios — Fall Ball</title>
-  <meta name="description" content="IronWorks Studios — Fall Ball. 2D arcade game. Play now on Google Play." />
 
-  <!-- Basic styling: modern, minimal, mobile-first -->
+  <!-- Basic styling: colorful, modern, mobile-first -->
   <style>
     :root{
-      --bg:#0f1720;
-      --card:#0f172a;
-      --muted:#98a0b3;
-      --accent:#ff6b35;
-      --glass: rgba(255,255,255,0.04);
-      --radius:16px;
-      --max-w:1100px;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      color-scheme: dark;
+      --bg:#0f1724;
+      --card:#0b1220;
+      --muted: #9aa9c6;
+      --accent1: #ff6b6b;   /* coral */
+      --accent2: #6bdeff;   /* cyan */
+      --accent3: #ffd36b;   /* warm yellow */
+      --glass: rgba(255,255,255,0.06);
+      --radius: 14px;
+      --max-w: 980px;
+      --nav-h: 64px;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
-    *{box-sizing:border-box}
+
     html,body{height:100%}
     body{
       margin:0;
       background:
-        radial-gradient(600px 300px at 10% 10%, rgba(255,107,53,0.06), transparent 6%),
-        radial-gradient(500px 250px at 90% 90%, rgba(55,125,255,0.03), transparent 6%),
+        radial-gradient(800px 400px at 10% 10%, rgba(107,222,255,0.06), transparent 10%),
+        radial-gradient(600px 300px at 90% 90%, rgba(255,107,107,0.04), transparent 10%),
         var(--bg);
-      color:#e6eef8;
+      color: #e6eef8;
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
+      line-height:1.35;
       display:flex;
-      align-items:center;
       justify-content:center;
-      padding:32px 18px;
+      padding:28px 18px;
+      box-sizing:border-box;
     }
 
-    .wrap{
+    .container{
       width:100%;
       max-width:var(--max-w);
-      display:grid;
-      grid-template-columns: 1fr;
-      gap:20px;
     }
 
-    header.site{
+    /* Header / top nav */
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      height:var(--nav-h);
+      margin-bottom:18px;
+    }
+
+    .brand{
       display:flex;
       align-items:center;
       gap:12px;
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      padding:14px;
-      border-radius:12px;
-      backdrop-filter: blur(6px) saturate(120%);
     }
-    header .brand{
-      display:flex;
-      gap:12px;
-      align-items:center;
-    }
-    header img.logo{
-      width:56px;
-      height:56px;
+    .brand img{
+      width:48px;
+      height:48px;
       object-fit:contain;
       border-radius:10px;
-      background:var(--glass);
-      padding:8px;
-      box-shadow: 0 6px 20px rgba(2,6,23,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+      background:linear-gradient(135deg,var(--accent2),var(--accent1));
+      padding:6px;
+      box-shadow:0 6px 18px rgba(11,17,32,0.6), inset 0 -6px 12px rgba(255,255,255,0.03);
     }
-    header h1{
+    .brand h1{
       font-size:18px;
       margin:0;
-      letter-spacing:0.2px;
+      letter-spacing:0.4px;
     }
-    header p.small{
-      margin:0;
-      color:var(--muted);
-      font-size:13px;
-    }
+    .brand p{margin:0;font-size:12px;color:var(--muted)}
 
-    main.hero{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap:18px;
-      align-items:center;
-    }
-
-    .card{
+    /* Main hero card */
+    .hero{
       background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
       border-radius:var(--radius);
       padding:18px;
-      box-shadow: 0 10px 30px rgba(2,6,23,0.6);
-      border: 1px solid rgba(255,255,255,0.025);
-    }
-
-    /* Feature area */
-    .feature{
+      box-shadow: 0 8px 40px rgba(2,6,23,0.6);
       display:grid;
       grid-template-columns: 1fr;
       gap:14px;
-    }
-    .feature-top{
-      display:flex;
-      gap:14px;
       align-items:center;
-    }
-    .game-art{
-      width:110px;
-      height:110px;
-      flex:0 0 110px;
-      border-radius:12px;
       overflow:hidden;
-      background:linear-gradient(135deg,#111827, #0b1220);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      box-shadow: 0 8px 30px rgba(2,6,23,0.6);
     }
-    .game-art img{max-width:92%; max-height:92%; display:block}
 
-    .feature-title{
+    /* Layout for larger screens */
+    @media(min-width:900px){
+      .hero{grid-template-columns: 48% 52%;}
+    }
+
+    /* Left column: feature image + download CTA */
+    .feature{
       display:flex;
       flex-direction:column;
-      gap:6px;
+      gap:12px;
+      align-items:flex-start;
     }
-    .feature-title h2{
-      margin:0;
-      font-size:20px;
+    .game-card{
+      position:relative;
+      width:100%;
+      background: linear-gradient(135deg, rgba(107,222,255,0.06), rgba(255,107,107,0.04));
+      border-radius:12px;
+      padding:14px;
+      display:flex;
+      gap:12px;
+      align-items:center;
+      box-shadow: 0 8px 30px rgba(11,17,32,0.5);
     }
-    .feature-title p{margin:0; color:var(--muted); font-size:14px}
+    .game-card img{
+      width:92px;
+      height:92px;
+      object-fit:contain;
+      border-radius:10px;
+      background: linear-gradient(135deg,var(--accent3),rgba(255,255,255,0.02));
+      padding:8px;
+    }
+    .game-info h2{margin:0;font-size:20px}
+    .game-info p{margin:4px 0 0;color:var(--muted);font-size:13px}
 
     .cta-row{
       display:flex;
       gap:10px;
       flex-wrap:wrap;
-      margin-top:6px;
-    }
-    .btn{
-      appearance:none;
-      border:0;
-      padding:10px 14px;
-      border-radius:10px;
-      font-weight:600;
-      cursor:pointer;
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-    }
-    .btn-play{
-      background:linear-gradient(90deg,var(--accent), #ff8a55);
-      color:#081018;
-      box-shadow: 0 8px 30px rgba(255,107,53,0.14);
-    }
-    .btn-secondary{
-      background:transparent;
-      color:var(--muted);
-      border:1px solid rgba(255,255,255,0.03);
-    }
-
-    /* Feature description */
-    .desc{
-      color:var(--muted);
-      line-height:1.45;
-      font-size:14px;
       margin-top:4px;
     }
-
-    /* Gallery mock */
-    .mock{
-      height:220px;
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
       border-radius:12px;
-      overflow:hidden;
-      background:
-        linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)),
-        linear-gradient(180deg, rgba(0,0,0,0.06), transparent);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      position:relative;
+      font-weight:600;
+      font-size:14px;
+      cursor:pointer;
+      text-decoration:none;
+      color:#081229;
+      border:0;
     }
-    .mock img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      filter:contrast(1.02) saturate(1.02);
+    .btn-store{
+      background:linear-gradient(90deg,var(--accent2),var(--accent1));
+      color:#041026;
+      box-shadow:0 8px 20px rgba(107,222,255,0.08);
     }
-    .mock .overlay{
-      position:absolute;
-      inset:0;
-      background:linear-gradient(180deg, transparent 30%, rgba(0,0,0,0.28));
+    .btn-play{
+      background:var(--glass);
+      color:var(--accent3);
+      border:1px solid rgba(255,211,107,0.12);
     }
 
-    /* Footer/contact */
-    footer{
+    .meta{
+      font-size:12px;
+      color:var(--muted);
       display:flex;
-      gap:14px;
-      align-items:center;
-      justify-content:space-between;
+      gap:10px;
       flex-wrap:wrap;
+      margin-top:6px;
+    }
+
+    /* Right column: about + features + contact */
+    .panel{
       padding:12px;
       border-radius:12px;
-      background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));
-      border:1px solid rgba(255,255,255,0.02);
-    }
-    .contact{
+      background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
       display:flex;
+      flex-direction:column;
       gap:12px;
+    }
+
+    .section-title{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:700;
+    }
+
+    .desc{color:var(--muted); font-size:14px}
+
+    .features{
+      display:grid;
+      grid-template-columns: repeat(2,1fr);
+      gap:8px;
+    }
+    @media(max-width:480px){ .features{grid-template-columns:1fr} }
+
+    .feature-item{
+      background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+      padding:10px;
+      border-radius:10px;
+      font-size:13px;
+      display:flex;
+      gap:10px;
       align-items:center;
     }
-    .contact a{color:var(--muted); text-decoration:none; font-weight:600; font-size:14px}
-    .socials{display:flex; gap:8px; align-items:center}
-
-    /* Responsive layout for larger screens */
-    @media(min-width:880px){
-      .wrap{grid-template-columns: 1fr}
-      main.hero{
-        grid-template-columns: 1fr 420px;
-      }
-      .feature{padding:18px}
-      .mock{height:360px}
+    .pill{
+      min-width:36px;
+      height:36px;
+      background:linear-gradient(135deg,var(--accent1),var(--accent2));
+      border-radius:10px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+      color:#031026;
+      font-size:13px;
     }
+
+    .contact{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:8px;
+      margin-top:6px;
+    }
+    .contact a{color:var(--accent2); text-decoration:none; font-weight:600; font-size:14px}
+
+    /* Footer */
+    footer{
+      margin-top:16px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      color:var(--muted);
+      font-size:13px;
+      padding:12px;
+      border-radius:12px;
+      background: transparent;
+    }
+
+    /* subtle animated background shapes */
+    .bg-blob{
+      position:absolute;
+      inset:auto;
+      width:220px;height:220px;
+      filter:blur(36px);
+      opacity:0.12;
+      z-index:0;
+      pointer-events:none;
+      transform:translateY(-20px);
+    }
+    .bg-blob.cyan{right:8%; top:-40px; background:radial-gradient(circle,#6bdeff,#285f6b)}
+    .bg-blob.coral{left:6%; bottom:-40px; background:radial-gradient(circle,#ff6b6b,#b33b3b)}
   </style>
 </head>
 <body>
-  <div class="wrap">
-
-    <header class="site card" aria-label="IronWorks Studios header">
+  <div class="container">
+    <header>
       <div class="brand">
-        <img src="/logo.png" alt="IronWorks Studios logo" class="logo" />
+        <img src="/logo.png" alt="IronWorks Studios logo" />
         <div>
           <h1>IronWorks Studios</h1>
-          <p class="small">Crafting sleek 2D arcade experiences</p>
+          <p>Colorful 2D arcade & casual games</p>
         </div>
       </div>
-      <div style="margin-left:auto; text-align:right">
-        <p class="small">Contact</p>
-        <a href="mailto:ironworks@yaani.com" style="color:var(--accent); font-weight:700; text-decoration:none">ironworks@yaani.com</a>
-      </div>
+
+      <nav aria-label="top links" style="display:flex;gap:8px;align-items:center">
+        <a class="btn btn-play" href="#about" style="padding:8px 12px;border-radius:10px;background:var(--glass);color:var(--accent3)">About</a>
+        <a class="btn btn-store" href="https://play.google.com/store/apps/details?id=com.ironworks.fallball" target="_blank" rel="noopener">Get Fall Ball</a>
+      </nav>
     </header>
 
-    <main class="hero">
-      <section class="card feature" aria-labelledby="fallball-title">
-        <div class="feature-top">
-          <div class="game-art" aria-hidden="true">
-            <img src="/fallball/assets/logo.png" alt="Fall Ball logo" />
-          </div>
-          <div class="feature-title">
-            <h2 id="fallball-title">Fall Ball — 2D Arcade</h2>
-            <p>Fast-paced, colorful arcade action. Easy to learn, hard to master.</p>
-            <div class="cta-row">
-              <a class="btn btn-play" href="https://play.google.com/store/apps/details?id=com.ironworks.fallball" rel="noopener" target="_blank">
-                ▶ Play on Google Play
-              </a>
-              <a class="btn btn-secondary" href="#about">About the Game</a>
+    <main class="hero" role="main">
+      <div class="feature">
+        <div class="game-card" aria-hidden="false">
+          <img src="/fallball/assets/logo.png" alt="Fall Ball logo" />
+          <div class="game-info">
+            <h2>Fall Ball</h2>
+            <p class="desc">A colorful 2D arcade game — quick rounds, joyful visuals, tight controls.</p>
+            <div class="meta">
+              <span><strong>Version:</strong> thirteen</span>
+              <span><strong>Genre:</strong> 2D arcade</span>
             </div>
           </div>
         </div>
 
-        <p class="desc">
-          Drop, dodge and score in Fall Ball. Short sessions, vibrant pixel art, and tight controls make it perfect for quick fun on the go.
-        </p>
+        <div style="width:100%">
+          <p class="desc">Jump into Fall Ball — a fast-paced arcade experience with vibrant levels, easy pick-up-and-play mechanics, and a focus on visibility and simple, satisfying gameplay.</p>
 
-        <div style="display:flex; gap:12px; margin-top:12px; flex-wrap:wrap;">
-          <div style="background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:10px 12px; border-radius:10px;">
-            <strong style="color:var(--accent)">Genre:</strong> 2D Arcade
+          <div class="cta-row">
+            <a class="btn btn-store" href="https://play.google.com/store/apps/details?id=com.ironworks.fallball" target="_blank" rel="noopener">
+              • Play on Google Play
+            </a>
+            <a class="btn btn-play" href="#screenshots" style="background:linear-gradient(90deg,var(--accent3),rgba(255,211,107,0.06));color:#081229">
+              • Screenshots
+            </a>
+            <a class="btn" href="#contact" style="background:transparent;color:var(--muted);border:1px solid rgba(255,255,255,0.04)">
+              • Rate & Feedback
+            </a>
           </div>
-          <div style="background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:10px 12px; border-radius:10px;">
-            <strong style="color:var(--accent)">Platform:</strong> Android
+
+          <div class="meta" style="margin-top:12px">
+            <span>High contrast UI</span>
+            <span>Large touch targets</span>
+            <span>Optimized for mobile</span>
           </div>
         </div>
 
-        <div style="margin-top:12px">
-          <a class="btn btn-secondary" href="https://play.google.com/store/apps/details?id=com.ironworks.fallball" target="_blank" rel="noopener">
-            Open store page
-          </a>
-        </div>
-      </section>
+        <div style="margin-top:8px;color:var(--muted);font-size:13px">Pro tip: on small screens, buttons are large and tappable; important texts use high-contrast colors.</div>
+      </div>
 
-      <aside class="card" aria-label="Game showcase">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-          <div>
-            <h3 style="margin:0">Gameplay Preview</h3>
-            <p style="margin:0; color:var(--muted); font-size:13px">Screenshots & trailer</p>
+      <aside class="panel" id="about">
+        <div>
+          <div class="section-title">About Fall Ball</div>
+          <p class="desc" style="margin:8px 0 0">Fall Ball is a joyful 2D arcade game built around quick reflexes and playful stage hazards. Designed for short sessions with bold colors and clear visual hierarchy so players can react fast.</p>
+        </div>
+
+        <div>
+          <div class="section-title">Highlights</div>
+          <div class="features" style="margin-top:8px">
+            <div class="feature-item"><div class="pill">01</div><div><strong>Fast rounds</strong><div class="desc">60–120 second matches</div></div></div>
+            <div class="feature-item"><div class="pill">02</div><div><strong>Accessible</strong><div class="desc">High-contrast art & large touch targets</div></div></div>
+            <div class="feature-item"><div class="pill">03</div><div><strong>Colorful</strong><div class="desc">Palette-driven levels</div></div></div>
+            <div class="feature-item"><div class="pill">04</div><div><strong>Replayable</strong><div class="desc">Procedural obstacles & leaderboards</div></div></div>
           </div>
-          <div style="color:var(--muted); font-size:13px">v1.0</div>
         </div>
 
-        <div class="mock" aria-hidden="true">
-          <!-- Replace with actual screenshot or autoplaying muted gif/webm -->
-          <img src="/fallball/assets/screenshot1.png" alt="Fall Ball screenshot (replace path if needed)" onerror="this.src='https://via.placeholder.com/720x360/0b1220/1f2937?text=Fall+Ball+Preview'"/>
-          <div class="overlay"></div>
+        <div id="contact">
+          <div class="section-title">Contact</div>
+          <div class="contact" style="margin-top:8px">
+            <div style="color:var(--muted);font-size:13px">
+              <div><strong>Email</strong></div>
+              <div><a href="mailto:ironworks@yaani.com">ironworks@yaani.com</a></div>
+            </div>
+            <div style="text-align:right;color:var(--muted);font-size:13px">
+              <div><strong>Studio</strong></div>
+              <div>IronWorks Studios</div>
+            </div>
+          </div>
         </div>
 
-        <div style="display:flex; gap:10px; margin-top:12px;">
-          <a class="btn btn-play" href="https://play.google.com/store/apps/details?id=com.ironworks.fallball" target="_blank" rel="noopener">Get on Google Play</a>
-          <a class="btn btn-secondary" href="#contact">Contact</a>
-        </div>
+        <footer>
+          <div>© <span id="year"></span> IronWorks Studios</div>
+          <div style="display:flex;gap:10px;align-items:center">
+            <a href="https://play.google.com/store/apps/details?id=com.ironworks.fallball" class="btn btn-store" style="padding:8px 12px;font-size:13px">Open in Play Store</a>
+          </div>
+        </footer>
       </aside>
 
+      <!-- decorative blobs -->
+      <div class="bg-blob cyan" aria-hidden="true"></div>
+      <div class="bg-blob coral" aria-hidden="true"></div>
     </main>
 
-    <section id="about" class="card" style="padding:18px;">
-      <h3 style="margin-top:0">About Fall Ball</h3>
-      <p style="color:var(--muted); margin-top:6px; line-height:1.5">
-        Fall Ball is a short-session 2D arcade game built for touch. Players control a bouncing ball through falling obstacles and try to rack up high scores. Designed with accessibility and replayability in mind.
-      </p>
-      <ul style="color:var(--muted); margin-top:8px; padding-left:18px">
-        <li>Simple one-touch controls</li>
-        <li>Progressive difficulty and daily challenges</li>
-        <li>Minimalist pixel art and crisp audio</li>
-      </ul>
-    </section>
-
-    <footer class="card" id="contact" aria-label="IronWorks contact">
-      <div class="contact">
-        <img src="/logo.png" alt="IronWorks logo" style="width:44px;height:44px; border-radius:8px; background:var(--glass); padding:6px"/>
-        <div>
-          <div style="font-weight:700">IronWorks Studios</div>
-          <a href="mailto:ironworks@yaani.com">ironworks@yaani.com</a>
+    <!-- optional screenshots area (placeholder) -->
+    <section id="screenshots" style="margin-top:16px;">
+      <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+        <div style="flex:1;min-width:180px;background:linear-gradient(135deg,#081229,rgba(255,255,255,0.01));border-radius:12px;padding:10px;max-width:260px">
+          <div style="height:420px;border-radius:10px;background:linear-gradient(180deg,rgba(255,107,107,0.07),rgba(107,222,255,0.04));display:flex;align-items:center;justify-content:center;color:#041026;font-weight:700">
+            Screenshot 1
+          </div>
+        </div>
+        <div style="flex:1;min-width:180px;background:linear-gradient(135deg,#081229,rgba(255,255,255,0.01));border-radius:12px;padding:10px;max-width:260px">
+          <div style="height:420px;border-radius:10px;background:linear-gradient(180deg,rgba(255,211,107,0.07),rgba(107,222,255,0.03));display:flex;align-items:center;justify-content:center;color:#041026;font-weight:700">
+            Screenshot 2
+          </div>
+        </div>
+        <div style="flex:1;min-width:180px;background:linear-gradient(135deg,#081229,rgba(255,255,255,0.01));border-radius:12px;padding:10px;max-width:260px">
+          <div style="height:420px;border-radius:10px;background:linear-gradient(180deg,rgba(107,222,255,0.06),rgba(255,107,107,0.03));display:flex;align-items:center;justify-content:center;color:#041026;font-weight:700">
+            Screenshot 3
+          </div>
         </div>
       </div>
-
-      <div class="socials">
-        <a class="btn btn-secondary" href="https://play.google.com/store/apps/details?id=com.ironworks.fallball" target="_blank" rel="noopener">Google Play</a>
-        <a class="btn btn-secondary" href="mailto:ironworks@yaani.com">Email</a>
-      </div>
-    </footer>
+    </section>
 
   </div>
 
-  <!-- Small script to enhance mobile UX (no external libs) -->
   <script>
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click', e=>{
-        e.preventDefault();
-        document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth', block:'center'});
+    // small runtime tweaks: set current year and accessible focus outlines
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ensure large tap targets for keyboard users
+    (function(){
+      const links = document.querySelectorAll('a,button');
+      links.forEach(el=>{
+        el.style.outline = 'none';
+        el.addEventListener('focus', ()=> el.style.boxShadow = '0 0 0 4px rgba(107,222,255,0.12)');
+        el.addEventListener('blur', ()=> el.style.boxShadow = 'none');
       });
-    });
+    })();
   </script>
 </body>
 </html>

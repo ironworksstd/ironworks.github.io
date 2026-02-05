@@ -1,334 +1,136 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>IronWorks Studios</title>
+.container{
+  width:100%;
+  max-width:980px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius:20px;
+  padding:28px;
+  box-shadow: 0 8px 30px rgba(2,6,23,0.6);
+  display:flex;
+  gap:24px;
+  align-items:center;
+}
 
-<!-- Visually clear, high-contrast color system -->
-<style>
-  :root{
-    /* Primary color palette (colorful, accessible) */
-    --bg:#0f1724;               /* very dark blue for depth */
-    --card:#0b1220;             /* slightly lighter card bg */
-    --accent:#ff5c8a;           /* warm pink */
-    --accent-2:#4fd1c5;         /* teal */
-    --accent-3:#ffd166;         /* warm yellow */
-    --muted:#94a3b8;            /* for secondary text */
-    --white:#ffffff;
-    --glass: rgba(255,255,255,0.04);
-    --radius:12px;
-    --max-width:1000px;
-    --shadow: 0 6px 20px rgba(2,6,23,0.6);
-    --focus: 3px solid rgba(79,209,197,0.16);
-    --button-height:52px;
-  }
+.brand{
+  display:flex;
+  gap:18px;
+  align-items:center;
+  min-width:260px;
+}
 
-  /* Base reset and typography */
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0;
-    font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    background:
-      radial-gradient(1200px 600px at 10% 10%, rgba(79,209,197,0.06), transparent 6%),
-      radial-gradient(900px 450px at 90% 90%, rgba(255,92,138,0.05), transparent 8%),
-      var(--bg);
-    color:var(--white);
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    line-height:1.35;
-    padding:24px;
-    display:flex;
-    justify-content:center;
-    align-items:flex-start;
-    gap:24px;
-  }
+.logo{
+  width:96px;
+  height:96px;
+  border-radius:16px;
+  background:var(--glass);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  flex-shrink:0;
+  box-shadow: inset 0 -6px 18px rgba(0,0,0,0.6), 0 6px 18px rgba(0,0,0,0.5);
+}
+.logo img{width:90%; height:90%; object-fit:contain; display:block}
 
-  /* Page container */
-  .container{
-    width:100%;
-    max-width:var(--max-width);
-    margin:0 auto;
-  }
+.title{
+  line-height:1;
+}
+.title h1{
+  margin:0;
+  font-size:22px;
+  letter-spacing:0.2px;
+}
+.title p{
+  margin:6px 0 0 0;
+  color:var(--muted);
+  font-size:13px;
+}
 
-  header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:16px;
-  }
+.actions{
+  margin-left:auto;
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
 
-  /* Logo: ensure clear sizing + alt text usage */
-  .brand{
-    display:flex;
-    align-items:center;
-    gap:12px;
-  }
-  .brand img{
-    width:54px;
-    height:54px;
-    object-fit:contain;
-    border-radius:10px;
-    background:linear-gradient(135deg,var(--accent),var(--accent-2));
-    padding:8px;
-    box-shadow: 0 6px 18px rgba(15,23,36,0.6);
-  }
-  .brand h1{
-    font-size:18px;
-    margin:0;
-    letter-spacing:0.4px;
-  }
-  .brand p{margin:0;font-size:12px;color:var(--muted)}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  color:var(--accent);
+  border:1px solid rgba(88,166,255,0.12);
+  padding:10px 14px;
+  border-radius:12px;
+  text-decoration:none;
+  font-weight:600;
+  font-size:13px;
+}
+.btn.primary{
+  background:linear-gradient(90deg, rgba(88,166,255,0.14), rgba(120,85,255,0.08));
+  color:#061029;
+  border:none;
+  box-shadow: 0 6px 24px rgba(88,166,255,0.08);
+}
 
-  /* Hero area */
-  .hero{
-    margin-top:18px;
-    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    border-radius:var(--radius);
-    padding:18px;
-    box-shadow:var(--shadow);
-    display:grid;
-    grid-template-columns: 1fr;
-    gap:16px;
-    align-items:center;
-  }
+.info{
+  padding:20px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
+  border-radius:12px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  min-width:360px;
+}
+.meta{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  color:var(--muted);
+  font-size:13px;
+}
+.meta strong{color:#e9f4ff; font-weight:700}
 
-  /* Card layout for mobile-first */
-  .hero-grid{
-    display:grid;
-    grid-template-columns: 1fr;
-    gap:14px;
-  }
+.description{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.45;
+}
 
-  .headline{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-  }
-  .headline h2{
-    margin:0;
-    font-size:22px;
-    line-height:1.05;
-  }
-  .headline p{margin:0;color:var(--muted);font-size:14px}
+footer{
+  margin-top:18px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  color:var(--muted);
+  font-size:13px;
+  width:100%;
+}
 
-  /* CTA buttons grouped */
-  .cta-row{
-    display:flex;
-    gap:12px;
-    align-items:center;
-    flex-wrap:wrap;
-  }
-  .btn{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    gap:10px;
-    height:var(--button-height);
-    min-width:140px;
-    padding:0 16px;
-    border-radius:12px;
-    border:0;
-    cursor:pointer;
-    font-weight:600;
-    font-size:15px;
-    text-decoration:none;
-  }
-  .btn-primary{
-    background:linear-gradient(90deg,var(--accent),var(--accent-2));
-    color:var(--white);
-    box-shadow: 0 8px 24px rgba(79,209,197,0.12);
-  }
-  .btn-ghost{
-    background:transparent;
-    color:var(--white);
-    border:1px solid rgba(255,255,255,0.08);
-    padding:0 14px;
-    min-width:120px;
-  }
-  .btn:focus{outline:none; box-shadow:var(--focus)}
-  .store-badge{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    background:linear-gradient(90deg,var(--accent-2),var(--accent-3));
-    color:#072026;
-    padding:8px 12px;
-    border-radius:10px;
-    font-weight:700;
-    font-size:14px;
-    min-height:44px;
-  }
-  .store-badge img{height:26px; width:auto; display:block}
+.small{
+  font-size:12px;
+  color:var(--muted);
+}
 
-  /* Feature strip */
-  .features{
-    display:flex;
-    gap:12px;
-    overflow:auto;
-    padding-bottom:4px;
-  }
-  .feature{
-    background:var(--card);
-    padding:12px;
-    min-width:160px;
-    border-radius:10px;
-    border:1px solid rgba(255,255,255,0.03);
-  }
-  .feature h3{margin:0;font-size:14px}
-  .feature p{margin:6px 0 0;color:var(--muted);font-size:13px}
+@media (max-width:760px){
+  body{padding:18px}
+  .container{flex-direction:column; align-items:stretch; padding:18px}
+  .brand{width:100%}
+  .actions{margin-left:0}
+  .info{min-width:0}
+  footer{flex-direction:column; align-items:flex-start; gap:8px}
+}
 
-  /* Showcase / mockup */
-  .mockup{
-    background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
-    border-radius:12px;
-    padding:10px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    min-height:220px;
-  }
-  .phone{
-    width:220px;
-    height:440px;
-    background:linear-gradient(180deg,#061028 60%, #0b192a);
-    border-radius:28px;
-    box-shadow: 0 18px 40px rgba(5,10,20,0.6);
-    border: 8px solid rgba(255,255,255,0.02);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:var(--muted);
-    font-size:13px;
-  }
+<section class="info" aria-label="Company info">
+  <div class="meta"><strong>Email:</strong><span>ironworks@yaani.com</span></div>
+  <div class="meta"><strong>Store:</strong><a href="https://play.google.com/store/apps/dev?id=7277468339401903439" style="color:var(--accent); text-decoration:none" target="\_blank" rel="noopener">Google Play Developer Page</a></div>
 
-  /* Footer / contact */
-  footer{
-    margin-top:16px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
-    color:var(--muted);
-    font-size:13px;
-  }
-  .contact{
-    display:flex;
-    gap:12px;
-    align-items:center;
-  }
-  .contact a{color:var(--white); text-decoration:none; font-weight:600}
-  .small{
-    font-size:12px;color:var(--muted)
-  }
+  <p class="description">
+    We design and ship mobile games with a modern aesthetic and tight gameplay loops. If you'd like press assets, partnership info, or business inquiries, reach out by email.
+  </p>
 
-  /* Accessibility: focusable elements visible */
-  a:focus, button:focus { outline:none; box-shadow:var(--focus); border-radius:10px; }
-
-  /* Responsive: two-column on wider screens */
-  @media (min-width:860px){
-    .hero{
-      grid-template-columns: 1fr 420px;
-      padding:24px;
-    }
-    .hero-grid{gap:20px}
-    .headline h2{font-size:28px}
-    .brand img{width:64px;height:64px}
-    .phone{width:260px;height:520px}
-  }
-
-  /* Reduce motion preference */
-  @media (prefers-reduced-motion:reduce){
-    *{transition:none!important; animation:none!important}
-  }
-
-  /* Utility */
-  .muted{color:var(--muted)}
-  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;}
-</style>
-</head>
-<body>
-  <div class="container" role="main">
-    <header>
-      <div class="brand" aria-label="IronWorks Studios">
-        <img src="/logo.png" alt="IronWorks Studios logo" />
-        <div>
-          <h1>IronWorks Studios</h1>
-          <p>Crafting colorful mobile games</p>
-        </div>
-      </div>
-
-      <nav aria-label="Primary">
-        <a class="btn btn-ghost" href="#games" style="font-size:13px">Games</a>
-        <a class="btn btn-ghost" href="#about" style="font-size:13px">About</a>
-      </nav>
-    </header>
-
-    <section class="hero" aria-labelledby="hero-heading">
-      <div class="hero-grid">
-        <div class="headline">
-          <h2 id="hero-heading">Play bright, play bold — games by IronWorks Studios</h2>
-          <p>Colorful mobile experiences designed with clarity, large tap targets, and readable text for everyone.</p>
-
-          <div class="cta-row" style="margin-top:4px">
-            <a class="btn btn-primary" href="https://play.google.com/store/apps/dev?id=7277468339401903439" aria-label="Visit our Google Play developer page">
-              Get our games
-            </a>
-
-            <a class="btn btn-ghost" href="mailto:ironworks@yaani.com" aria-label="Email IronWorks Studios">
-              Contact us
-            </a>
-
-            <span class="store-badge" aria-hidden="true">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="" />
-              Play Store
-            </span>
-          </div>
-        </div>
-
-        <div class="features" aria-hidden="false" role="list">
-          <div class="feature" role="listitem">
-            <h3>Readable UI</h3>
-            <p>Large text scale, high contrast, clear spacing.</p>
-          </div>
-          <div class="feature" role="listitem">
-            <h3>Tap-friendly</h3>
-            <p>Buttons sized for thumbs — 44–52px height.</p>
-          </div>
-          <div class="feature" role="listitem">
-            <h3>Optimized assets</h3>
-            <p>Compressed images & responsive SVGs for performance.</p>
-          </div>
-        </div>
-      </div>
-
-      <aside class="mockup" aria-label="Game preview">
-        <div class="phone" role="img" aria-label="Phone mockup showing game screenshot">
-          <div style="text-align:center; padding:18px;">
-            <strong style="display:block;color:var(--white);font-size:15px">IronWorks Preview</strong>
-            <p style="color:var(--muted);margin-top:8px">Drag your screenshot here or replace the inner content with a real game image (use responsive <code>img</code> inside).</p>
-          </div>
-        </div>
-      </aside>
-    </section>
-
-    <footer>
-      <div class="contact">
-        <span class="small">Studio</span>
-        <a href="mailto:ironworks@yaani.com">ironworks@yaani.com</a>
-      </div>
-
-      <div class="small muted">© <span id="year"></span> IronWorks Studios</div>
-    </footer>
-  </div>
-
-<script>
-  // Insert current year
-  document.getElementById('year').textContent = new Date().getFullYear();
-
-  // Accessibility: ensure keyboard focus on first interactive element
-  (function(){ document.querySelectorAll('a,button,input,textarea,select')[0]?.focus(); })();
-</script>
-</body>
-</html>
+  <footer>
+    <div class="small">IronWorks Studios</div>
+    <div class="small">Built for mobile • Minimal & modern</div>
+  </footer>
+</section>

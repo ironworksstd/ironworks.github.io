@@ -1,391 +1,214 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>IronWorks Studios</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IronWorks Studios - Mobile Game Developers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1E90FF;
+            --secondary-color: #FF6347;
+            --background-color: #F4F4F4;
+            --text-color: #333;
+            --accent-color: #4CAF50;
+        }
 
-<!-- Simple system font stack for fast rendering -->
-<style>
-  :root{
-    --bg:#0f1724;            /* dark navy background */
-    --panel:#0f1a2b;         /* slightly lighter panel */
-    --accent-1:#ff6b6b;      /* coral */
-    --accent-2:#6bffea;      /* aqua */
-    --accent-3:#ffd86b;      /* warm yellow */
-    --muted:#9aa7bf;         /* muted text */
-    --glass: rgba(255,255,255,0.04);
-    --radius:14px;
-    --maxw:1100px;
-    --gap:18px;
-    --shadow: 0 8px 30px rgba(2,6,23,0.6);
-  }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  /* Reset & layout */
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0;
-    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    background:
-      radial-gradient(1200px 600px at 10% 10%, rgba(107,111,255,0.06), transparent 8%),
-      radial-gradient(900px 500px at 90% 90%, rgba(255,107,107,0.03), transparent 6%),
-      var(--bg);
-    color: #e6eef8;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    line-height:1.35;
-    padding:32px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  }
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+        }
 
-  .container{
-    width:100%;
-    max-width:var(--maxw);
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
-    border-radius:calc(var(--radius) + 6px);
-    padding:28px;
-    box-shadow:var(--shadow);
-    display:grid;
-    grid-template-columns: 1fr 420px;
-    gap:var(--gap);
-    align-items:stretch;
-    min-height:520px;
-  }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
-  /* Left: hero & feature list */
-  .hero{
-    padding:24px;
-    border-radius:var(--radius);
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), var(--glass));
-    display:flex;
-    flex-direction:column;
-    gap:18px;
-    justify-content:center;
-  }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
 
-  header.brand{
-    display:flex;
-    gap:14px;
-    align-items:center;
-  }
-  header.brand img{
-    width:68px;
-    height:68px;
-    object-fit:contain;
-    border-radius:10px;
-    background:linear-gradient(135deg,var(--accent-2),var(--accent-1));
-    padding:8px;
-    box-shadow: 0 6px 20px rgba(99,102,255,0.12);
-  }
-  header.brand h1{
-    font-size:20px;
-    margin:0;
-    letter-spacing:0.4px;
-  }
-  header.brand p{
-    margin:0;
-    color:var(--muted);
-    font-size:13px;
-  }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
 
-  .headline{
-    margin-top:4px;
-    font-size:28px;
-    font-weight:700;
-    line-height:1.05;
-    letter-spacing:-0.6px;
-  }
+        .logo img {
+            max-width: 150px;
+            height: auto;
+            margin-right: 20px;
+        }
 
-  .sub{
-    color:var(--muted);
-    font-size:15px;
-    max-width:56ch;
-  }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
 
-  /* CTA buttons row */
-  .ctas{
-    display:flex;
-    gap:12px;
-    margin-top:6px;
-    flex-wrap:wrap;
-  }
-  .btn{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    text-decoration:none;
-    padding:12px 16px;
-    border-radius:12px;
-    font-weight:600;
-    font-size:15px;
-    box-shadow: 0 6px 20px rgba(2,6,23,0.45);
-    transition:transform .12s ease, box-shadow .12s ease;
-    border:1px solid rgba(255,255,255,0.04);
-  }
-  .btn:focus{outline:3px solid rgba(255,255,255,0.08); outline-offset:2px}
-  .btn:active{transform:translateY(1px)}
-  .btn-primary{
-    background: linear-gradient(90deg,var(--accent-1),var(--accent-2));
-    color:#07101a;
-  }
-  .btn-ghost{
-    background:transparent;
-    border:1px solid rgba(255,255,255,0.06);
-    color:var(--accent-3);
-  }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
 
-  /* feature grid */
-  .features{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-    gap:12px;
-    margin-top:12px;
-  }
-  .feature{
-    background:linear-gradient(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.02));
-    padding:12px;
-    border-radius:12px;
-    display:flex;
-    gap:10px;
-    align-items:center;
-    min-height:66px;
-  }
-  .badge{
-    width:46px; height:46px;
-    border-radius:10px;
-    display:flex;align-items:center;justify-content:center;
-    color:#07101a;font-weight:700;
-    font-size:16px;
-    box-shadow: 0 6px 18px rgba(2,6,23,0.45);
-  }
-  .f-title{font-weight:700;font-size:14px;margin:0}
-  .f-sub{font-size:12px;color:var(--muted);margin:0;margin-top:4px}
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
 
-  /* Right: panel with screenshots / contact */
-  .panel{
-    padding:20px;
-    border-radius:calc(var(--radius) - 6px);
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    display:flex;
-    flex-direction:column;
-    gap:14px;
-    min-height:420px;
-  }
+        .hero {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 50px 0;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
 
-  .preview{
-    flex:1;
-    border-radius:12px;
-    overflow:hidden;
-    background:
-      linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.25)),
-      linear-gradient(135deg, rgba(107,111,255,0.08), rgba(255,107,107,0.06));
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    position:relative;
-  }
+        .hero-content {
+            flex: 1;
+            padding: 0 20px;
+        }
 
-  .phone{
-    width:220px;
-    max-width:60%;
-    border-radius:28px;
-    background:linear-gradient(180deg,#071226, #0b1624);
-    padding:14px;
-    box-shadow: 0 18px 50px rgba(2,6,23,0.6);
-    border: 1px solid rgba(255,255,255,0.04);
-  }
-  .screen{
-    width:100%;
-    height:420px;
-    max-height:460px;
-    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.4));
-    border-radius:16px;
-    overflow:hidden;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:var(--muted);
-    font-size:14px;
-    padding:18px;
-    box-sizing:border-box;
-  }
-  .screen img{width:100%; height:100%; object-fit:cover; display:block}
+        .hero-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
 
-  .meta{
-    display:flex;
-    justify-content:space-between;
-    gap:12px;
-    align-items:center;
-  }
-  .store{
-    display:flex;
-    gap:10px;
-    align-items:center;
-  }
-  .store a{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    padding:10px 12px;
-    border-radius:10px;
-    text-decoration:none;
-    color:#07101a;
-    background: linear-gradient(90deg,var(--accent-3), #ffd37a);
-    font-weight:700;
-    font-size:14px;
-  }
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+        }
 
-  .contact{
-    display:flex;
-    flex-direction:column;
-    gap:8px;
-    font-size:14px;
-  }
-  .contact a{color:var(--accent-2); text-decoration:none; font-weight:600}
-  .small{font-size:13px;color:var(--muted)}
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
 
-  /* Footer */
-  footer{
-    margin-top:8px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:12px;
-    color:var(--muted);
-    font-size:13px;
-  }
+        .btn:hover {
+            background-color: darken(var(--accent-color), 10%);
+        }
 
-  /* Responsive adjustments */
-  @media (max-width:980px){
-    .container{grid-template-columns:1fr; padding:18px}
-    .panel{order:-1}
-    .phone{width:260px}
-    .screen{height:480px}
-  }
+        .games-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
 
-  @media (max-width:420px){
-    body{padding:18px}
-    .headline{font-size:22px}
-    header.brand img{width:56px;height:56px}
-    .phone{width:220px}
-    .screen{height:360px}
-    .container{padding:14px}
-  }
+        .game-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
 
-  /* Accessibility: focus-visible */
-  :focus{outline:none}
-  :focus-visible{outline:3px solid rgba(255,255,255,0.08); outline-offset:2px}
-</style>
+        .game-card:hover {
+            transform: scale(1.05);
+        }
+
+        .game-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .game-card-content {
+            padding: 15px;
+        }
+
+        footer {
+            background-color: var(--text-color);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        @media screen and (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .nav-links {
+                margin-top: 20px;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .cta-buttons {
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
 <body>
-  <main class="container" role="main" aria-labelledby="site-title">
-    <section class="hero" aria-label="IronWorks Studios overview">
-      <header class="brand">
-        <img src="/logo.png" alt="IronWorks Studios logo" onerror="this.style.display='none'"/>
-        <div>
-          <h1 id="site-title">IronWorks Studios</h1>
-          <p>Bold mobile games — crafted with performance & style</p>
-        </div>
-      </header>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="/logo.png" alt="IronWorks Studios Logo">
+            </div>
+            <nav class="nav-links">
+                <a href="#games">Games</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </header>
 
-      <h2 class="headline">Playful. Polished. Powerful.</h2>
-      <p class="sub">We design bright, engaging mobile games with crisp visuals and tight performance. Available on Google Play — built for fast downloads and standout visibility on small screens.</p>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Crafting Extraordinary Mobile Gaming Experiences</h1>
+                <p>Innovative games that push the boundaries of mobile entertainment</p>
+                <div class="cta-buttons">
+                    <a href="play.google.com/store/apps/dev?id=7277468339401903439" class="btn" target="_blank">Our Games</a>
+                    <a href="mailto:ironworks@yaani.com" class="btn">Contact Us</a>
+                </div>
+            </div>
+        </section>
 
-      <div class="ctas">
-        <a class="btn btn-primary" href="https://play.google.com/store/apps/dev?id=7277468339401903439" target="_blank" rel="noopener noreferrer" aria-label="Open IronWorks Studios on Google Play">
-          <!-- simple SVG icon -->
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden focusable="false"><path d="M3 12l18-9-2 18L12 21 3 12z" fill="#07101a"/></svg>
-          View on Google Play
-        </a>
+        <section id="games" class="games-section">
+            <!-- Add your game cards here -->
+            <div class="game-card">
+                <img src="game1-screenshot.jpg" alt="Game 1">
+                <div class="game-card-content">
+                    <h3>Game Title</h3>
+                    <p>Brief game description</p>
+                </div>
+            </div>
+            <!-- More game cards -->
+        </section>
 
-        <a class="btn btn-ghost" href="mailto:ironworks@yaani.com" aria-label="Email IronWorks Studios">
-          Contact Us
-        </a>
-      </div>
-
-      <div class="features" aria-hidden="false">
-        <div class="feature">
-          <div class="badge" style="background:linear-gradient(135deg,var(--accent-1),var(--accent-3))">UX</div>
-          <div>
-            <p class="f-title">Optimized UX</p>
-            <p class="f-sub">Readable UI scale, clear tap targets, fast load.</p>
-          </div>
-        </div>
-
-        <div class="feature">
-          <div class="badge" style="background:linear-gradient(135deg,var(--accent-2),var(--accent-1))">ART</div>
-          <div>
-            <p class="f-title">Vibrant Art</p>
-            <p class="f-sub">High-contrast palettes and accessible icons.</p>
-          </div>
-        </div>
-
-        <div class="feature">
-          <div class="badge" style="background:linear-gradient(135deg,var(--accent-3),var(--accent-2))">PERF</div>
-          <div>
-            <p class="f-title">Performance</p>
-            <p class="f-sub">Small APKs, smooth 60fps gameplay on modern phones.</p>
-          </div>
-        </div>
-      </div>
-
-      <footer>
-        <span class="small">© IronWorks Studios</span>
-        <span class="small">Built for mobile visibility</span>
-      </footer>
-    </section>
-
-    <aside class="panel" aria-label="Preview and contact">
-      <div class="preview" role="img" aria-label="Game preview screenshot">
-        <div class="phone" aria-hidden="false">
-          <div class="screen" id="screenshot">
-            <!-- Add screenshots in /screens/ or replace with dynamic content -->
-            <img src="/screens/hero-1.jpg" alt="Game screenshot" onerror="this.alt='Screenshot unavailable'; this.style.objectFit='contain'; this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'600\\' height=\\'800\\'><rect width=\\'100%\\' height=\\'100%\\' fill=\\'%2308141a\\'/><text x=\\'50%\\' y=\\'50%\\' fill=\\'%23b6c6dc\\' font-size=\\'20\\' font-family=\\'Arial\\' text-anchor=\\'middle\\'>Screenshot</text></svg>'"/>
-          </div>
-        </div>
-      </div>
-
-      <div class="meta">
-        <div>
-          <div style="font-weight:800;font-size:15px">Get our games</div>
-          <div class="small">Tap to open the developer page on Google Play</div>
-        </div>
-
-        <div class="store">
-          <a href="https://play.google.com/store/apps/dev?id=7277468339401903439" target="_blank" rel="noopener noreferrer" aria-label="Open Google Play developer page">
-            <!-- simplified Play badge -->
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M3 2l15 10-15 10V2z" fill="#07101a"/></svg>
-            Play Store
-          </a>
-        </div>
-      </div>
-
-      <div class="contact" aria-label="Contact information">
-        <div style="font-weight:700">Contact</div>
-        <div class="small">Email: <a href="mailto:ironworks@yaani.com">ironworks@yaani.com</a></div>
-        <div class="small">Logo path: <code>/logo.png</code></div>
-        <div class="small">Tip: include 512×512 PNG for best results.</div>
-      </div>
-    </aside>
-  </main>
-
-  <!-- Minimal JS to improve accessibility and avoid visibility issues -->
-  <script>
-    // Ensure focus outlines for keyboard users
-    (function(){
-      let mouseUsed = false;
-      window.addEventListener('mousedown', ()=> mouseUsed = true, {capture:true});
-      window.addEventListener('keydown', (e)=>{
-        if(e.key === 'Tab' || e.key === 'Shift') mouseUsed = false;
-      }, {capture:true});
-      document.addEventListener('focusin', (ev)=>{
-        if(mouseUsed) ev.target.classList.remove('focus-visible');
-        else ev.target.classList.add('focus-visible');
-      });
-    })();
-  </script>
+        <footer>
+            <p>&copy; 2026 IronWorks Studios. All Rights Reserved.</p>
+            <p>Contact: <a href="mailto:ironworks@yaani.com" style="color: white;">ironworks@yaani.com</a></p>
+        </footer>
+    </div>
 </body>
 </html>
